@@ -1,6 +1,5 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from pathlib import Path
 import unittest
 
 DRIVER_PATH = "/Users/sanghyuk/.local/bin/chromedriver"
