@@ -8,16 +8,17 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 MAX_WAIT = 5
+DRIVER_PATH = "/Users/sanghyuk/.local/bin/chromedriver"
+BRAVE_PATH = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
+
 
 
 class NewVisitorTest(LiveServerTestCase):
-    DRIVER_PATH = "/Users/sanghyuk/.local/bin/chromedriver"
-    BRAVE_PATH = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
 
     def setUp(self):
         option = webdriver.ChromeOptions()
-        option.binary_location = self.BRAVE_PATH
-        service = Service(executable_path=self.DRIVER_PATH)
+        option.binary_location = BRAVE_PATH
+        service = Service(executable_path=DRIVER_PATH)
 
         self.browser = webdriver.Chrome(options=option, service=service)
 
