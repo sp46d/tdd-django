@@ -12,9 +12,7 @@ DRIVER_PATH = "/Users/sanghyuk/.local/bin/chromedriver"
 BRAVE_PATH = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
 
 
-
 class NewVisitorTest(LiveServerTestCase):
-
     def setUp(self):
         option = webdriver.ChromeOptions()
         option.binary_location = BRAVE_PATH
@@ -122,3 +120,29 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertIn("Buy milk", page_text)
 
         # Satisfied, they both go back to sleep
+
+    def test_layout_and_styling(self):
+        # Edith goes to the home page
+        self.browser.get(self.live_server_url)
+
+        # Her browser window is set to a very specific size
+        self.browser.set_window_size(1024, 768)
+
+        # She notices the input box is nicely centered
+        inputbox = self.browser.find_element(By.ID, "id_new_item")
+        self.assertAlmostEqual(
+            inputbox.location["x"] + inputbox.size["width"] / 2,
+            512,
+            delta=10,
+        )
+
+        # She starts a new list and sees the input is nicely centered there too
+        inputbox.send_keys("A new item")
+        inputbox.send_keys(Keys.ENTER)
+        self.wait_for_row_in_list_table("1: A new item")
+        list_inputbox = self.browser.find_element(By.ID, "id_new_item")
+        self.assertAlmostEqual(
+            list_inputbox.location["x"] + list_inputbox.size["width"] / 2,
+            512,
+            delta=10,
+        )
