@@ -1,6 +1,6 @@
 import time
 
-from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.chrome.service import Service
@@ -12,7 +12,7 @@ DRIVER_PATH = "/Users/sanghyuk/.local/bin/chromedriver"
 BRAVE_PATH = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
 
 
-class NewVisitorTest(LiveServerTestCase):
+class NewVisitorTest(StaticLiveServerTestCase):
     def setUp(self):
         option = webdriver.ChromeOptions()
         option.binary_location = BRAVE_PATH
